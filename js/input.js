@@ -22,10 +22,10 @@ export class Interaction {
  }
  plane(x,y,point,normal){const ray=this.app.renderer.ray(x,y),den=ray.direction.reduce((a,v,k)=>a+v*normal[k],0);if(Math.abs(den)<.001)return point.slice();const t=point.reduce((a,v,k)=>a+(v-ray.origin[k])*normal[k],0)/den;return t>0?ray.origin.map((v,k)=>v+ray.direction[k]*t):point.slice();}
  ground(x,y){return this.plane(x,y,[0,.15,0],[0,1,0]);}
- down(e){if(e.button!==0&&e.button!==2)return;e.preventDefault();this.app.interact();this.canvas.focus({preventScroll:true});this.canvas.setPointerCapture(e.pointerId);this.pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});this.clearHover();
+ down(e){if(e.button!==0&&e.button!==1&&e.button!==2)return;e.preventDefault();this.app.interact();this.canvas.focus({preventScroll:true});this.canvas.setPointerCapture(e.pointerId);this.pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});this.clearHover();
   if(this.pointers.size>=2){this.cancelGesture();this.lastMulti=this.multi();return;}
   const base={x:e.clientX,y:e.clientY,lastX:e.clientX,lastY:e.clientY,start:performance.now(),moved:0,id:e.pointerId};
-  if(e.button===2||e.shiftKey||this.app.mode==='orbit'){this.gesture={...base,type:'orbit'};return;}
+  if(e.button===1||e.button===2||e.shiftKey||this.app.mode==='orbit'){this.gesture={...base,type:'orbit'};return;}
   if(this.app.paused||this.app.rebuilding){if(this.app.paused)this.app.toast('停止中です。▶ ボタンで再開できます。');return;}
   if(this.app.mode==='grab'){
    const hit=this.pick(e.clientX,e.clientY);if(!hit){this.gesture={...base,type:'orbit'};return;}
