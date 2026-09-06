@@ -1,0 +1,26 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {rng,rotate,integrateQuat,lookAt,multiply,perspective,raySphere} from '../js/math.js';
+import {CATALOG,PRESETS} from '../js/catalog.js';
+import {createGeometry,createStage,createPlane,createTrim} from '../js/geometry.js';
+import {World} from '../js/physics.js';
+
+const identity=[0,0,0,1];
+test('the same seed reproduces an identical world',()=>{assert.deepEqual(new World(100,42).bodies,new World(100,42).bodies);});
+test('different seeds produce different parts and poses',()=>{assert.notDeepEqual(new World(20,42).snapshot(),new World(20,43).snapshot());});
+test('seeded random values stay in [0, 1)',()=>{const r=rng(901);for(let i=0;i<10000;i++){const x=r();assert.ok(x>=0&&x<1);}});
+test('all fourteen categories are represented in the standard world',()=>{assert.equal(new Set(new World(1200).bodies.map(b=>b.type)).size,14);});
+test('mobile and desktop share the standard 1200-part preset',()=>{assert.equal(PRESETS.standard.count,1200);assert.equal(PRESETS.high.count,2000);});
+for(const count of [650,1200,2000])test(`the ${count}-part starting snapshot is finite and normalized`,()=>{const data=JSON.parse(readFileSync(new URL(`../assets/pile-${count}.json`,import.meta.url)));assert.equal(data.length,count*7);assert.ok(data.every(Number.isFinite));for(let i=0;i<count;i++){const q=data.slice(i*7+3,i*7+7);assert.ok(Math.abs(Math.hypot(...q)-1)<.00002);assert.ok(data[i*7+1]>-.26);}const w=new World(count);w.applySnapshot(data);assert.ok(w.bodies.every(b=>b.sleep));});
+for(const c of CATALOG)test(`${c.id}: procedural geometry contains finite triangle data`,()=>{const g=createGeometry(c.id);assert.ok(g.length>0);assert.equal(g.length%21,0);assert.ok(g.every(Number.isFinite));});
+test('all stage geometry is valid',()=>{for(const fn of [createStage,createPlane,createTrim]){const g=fn();assert.ok(g.length>0);assert.equal(g.length%21,0);assert.ok(g.every(Number.isFinite));}});
+test('an isolated nut falls onto the platform and settles',()=>{const w=new World(0);const b=w.add(2,[0,5,0],identity);for(let i=0;i<260;i++)w.step(1/60);assert.ok(b.p[1]>=.145&&b.p[1]<.17);assert.ok(Math.abs(b.v[1])<.08);});
+test('two intersecting bodies are separated by contact resolution',()=>{const w=new World(0),a=w.add(2,[0,4,0],identity),b=w.add(2,[.1,4,0],identity);const before=Math.abs(a.p[0]-b.p[0]);for(let i=0;i<8;i++)w.collide(a,b,false);assert.ok(Math.abs(a.p[0]-b.p[0])>before+.35);});
+test('sleeping objects do not advance until explicitly woken',()=>{const w=new World(10);for(const b of w.bodies)b.sleep=true;const before=w.snapshot();w.step();assert.deepEqual(w.snapshot(),before);w.wakeAll();w.step();assert.notDeepEqual(w.snapshot(),before);});
+test('an impulse changes both linear and angular velocity',()=>{const w=new World(0),b=w.add(0,[0,4,0],identity);b.sleep=true;w.impulse(b,[1,2,3],[.2,0,0]);assert.equal(b.sleep,false);assert.ok(Math.hypot(...b.v)>0);assert.ok(Math.hypot(...b.w)>0);});
+test('blast affects nearby bodies and ignores distant bodies',()=>{const w=new World(0),near=w.add(0,[1,1,0],identity),far=w.add(0,[40,1,0],identity);w.blast([0,0,0],1,6);assert.ok(Math.hypot(...near.v)>0);assert.equal(Math.hypot(...far.v),0);});
+test('magnet pulls toward the target without affecting distant objects',()=>{const w=new World(0),near=w.add(0,[1,1,0],identity),far=w.add(0,[40,1,0],identity);w.magnet([0,5,0],1/60);assert.ok(near.v[0]<0);assert.ok(near.v[1]>0);assert.equal(Math.hypot(...far.v),0);});
+test('spring dragging accelerates the selected object toward the pointer',()=>{const w=new World(0),b=w.add(0,[0,2,0],identity);w.pull(b,[2,5,0],1/60);assert.ok(b.v[0]>0&&b.v[1]>0);});
+test('a high-energy scene remains finite',()=>{const w=new World(180);w.blast([0,0,0],2.5,12);for(let i=0;i<120;i++)w.step(1/60);for(const b of w.bodies){assert.ok([...b.p,...b.q,...b.v,...b.w].every(Number.isFinite));assert.ok(Math.abs(Math.hypot(...b.q)-1)<1e-6);assert.ok(b.p[1]>-1);}});
+test('rotation and ray helpers preserve basic geometric invariants',()=>{assert.deepEqual(rotate(identity,[1,2,3]),[1,2,3]);const q=identity.slice();for(let i=0;i<1000;i++)integrateQuat(q,[1,2,3],1/60);assert.ok(Math.abs(Math.hypot(...q)-1)<1e-12);assert.equal(raySphere([0,0,5],[0,0,-1],[0,0,0],1),4);assert.equal(raySphere([0,0,5],[0,1,0],[0,0,0],1),null);const m=multiply(perspective(Math.PI/3,1,.1,100),lookAt([0,0,5],[0,0,0]));assert.ok(m.every(Number.isFinite));});

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#151914">
+  <meta name="description" content="HEAVY / PLAY — ネジ、ナット、工具。1,200個の金属部品を、つかんで、投げて、崩す。触れるための3Dプレイグラウンド。">
+  <title>HEAVY / PLAY — A beautiful mess.</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23151914'/%3E%3Cpath d='M32 8 53 20v24L32 56 11 44V20Z' fill='%23e1ef85'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23151914'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11 3.5a1.5 1.5 0 0 1 3 0V11 5a1.5 1.5 0 0 1 3 0v7-4a1.5 1.5 0 0 1 3 0v7c0 4-2.3 6-6 6h-1c-2 0-3.3-1-4.4-2.5L4.4 13a1.6 1.6 0 0 1 2.4-2z"/></symbol>
+    <symbol id="i-blast" viewBox="0 0 24 24"><path d="m12 2 1.8 6.2L20 5l-3.2 6.2L23 13l-6.2 1.8L20 21l-6.2-3.2L12 24l-1.8-6.2L4 21l3.2-6.2L1 13l6.2-1.8L4 5l6.2 3.2L12 2Z" transform="translate(1 0) scale(.92)"/></symbol>
+    <symbol id="i-magnet" viewBox="0 0 24 24"><path d="M5 3v10a7 7 0 0 0 14 0V3h-4v10a3 3 0 0 1-6 0V3H5Z"/><path d="M5 7h4m6 0h4"/></symbol>
+    <symbol id="i-orbit" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(-35 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(45 12 12)"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 .5 6M4 4v6h6"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M11 4 6 8H3v8h3l5 4V4Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="M11 4 6 8H3v8h3l5 4V4Zm5 5 6 6m0-6-6 6"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 4v5m0 6v5m8-16v10m0 5v1m8-16v1m0 6v9"/><path d="M1 9h6v6H1V9Zm8 5h6v5H9v-5Zm8-9h6v6h-6V5Z"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-11v1"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="3"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m7 4 14 8-14 8V4Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  </defs></svg>
+
+  <main id="playground">
+    <canvas id="world" tabindex="0" aria-label="金属部品の3Dプレイグラウンド。ドラッグで部品をつかみ、放すと投げられます。操作説明は右上のiボタン。"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="masthead">
+      <a class="wordmark" href="#" aria-label="HEAVY PLAY ホーム" id="home">
+        <svg class="brand-mark" viewBox="0 0 36 40" aria-hidden="true"><path d="M18 1 35 10.5v19L18 39 1 29.5v-19Z"/><path d="M18 12 25 16v8l-7 4-7-4v-8Z"/></svg>
+        <span>FORM <span class="brand-slash">/</span> 003</span>
+      </a>
+      <span class="masthead-caption">AN EXPERIMENT IN WEIGHT & DISORDER</span>
+      <div class="header-actions">
+        <button id="sound" class="sound-button" title="金属音をオンにする" aria-label="金属音をオンにする" aria-pressed="false"><svg class="icon"><use href="#i-mute"/></svg><span>SOUND OFF</span><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
+        <span class="header-separator"></span>
+        <button id="settings-toggle" class="icon-button" title="設定" aria-label="設定" aria-expanded="false" aria-controls="settings"><svg class="icon"><use href="#i-settings"/></svg></button>
+        <button id="help-toggle" class="icon-button" title="操作ガイド" aria-label="操作ガイド"><svg class="icon"><use href="#i-info"/></svg></button>
+      </div>
+    </header>
+
+    <section class="hero" aria-label="HEAVY PLAY">
+      <div class="eyebrow"><span class="live-dot"></span> A BEAUTIFUL MESS.</div>
+      <h1>HEAVY<br><span>PLAY<span class="title-dot">.</span></span></h1>
+      <p class="hero-subtitle">ただ、触って。<br>あとは、重力にまかせて。</p>
+      <div class="spec"><span class="spec-number" id="part-count">1,200</span><span class="spec-unit">METAL PARTS</span><span class="spec-divide"></span><span class="spec-number small">14</span><span class="spec-unit">KINDS</span></div>
+    </section>
+
+    <div class="edition" aria-hidden="true"><span class="edition-index">01 <span>/</span> THE PILE</span><span>NOTHING TO BUILD.<br>EVERYTHING TO BREAK.</span><div class="edition-line"></div></div>
+
+    <aside class="scene-actions" aria-label="山を操作">
+      <button id="scatter" class="scene-action primary-action" title="部品を一気に散らす（X）"><svg class="icon"><use href="#i-arrow"/></svg><span>SCATTER<small>一気に、散らす</small></span></button>
+      <button id="pour" class="scene-action" title="部品を90個追加する（P）"><svg class="icon"><use href="#i-plus"/></svg><span>MORE<small>もう少し、足す</small></span></button>
+    </aside>
+
+    <section class="bottom-note"><span class="micro">NO PURPOSE. ALL FEELING.</span><p>積み上げたのは、<br>崩すため。</p><div class="drag-note"><span class="tiny-cross">+</span><span id="context-hint">部品をドラッグして、放すと投げられます。</span></div></section>
+
+    <div class="toolbar-wrap">
+      <div class="mode-caption"><span class="caption-line"></span><span id="mode-caption">GRAB SOMETHING. LET IT GO.</span><span class="caption-line"></span></div>
+      <nav class="toolbar" aria-label="インタラクションモード">
+        <div class="mode-buttons">
+          <button class="mode-button active" data-mode="grab" aria-pressed="true" title="つかむ・投げる（G）"><svg class="icon"><use href="#i-hand"/></svg><span>つかむ</span><kbd>G</kbd></button>
+          <button class="mode-button" data-mode="blast" aria-pressed="false" title="長押しで衝撃をためる（B）"><svg class="icon"><use href="#i-blast"/></svg><span>衝撃</span><kbd>B</kbd></button>
+          <button class="mode-button" data-mode="magnet" aria-pressed="false" title="長押しで磁石を使う（M）"><svg class="icon"><use href="#i-magnet"/></svg><span>磁石</span><kbd>M</kbd></button>
+          <button class="mode-button" data-mode="orbit" aria-pressed="false" title="視点を回す（O）"><svg class="icon"><use href="#i-orbit"/></svg><span>視点</span><kbd>O</kbd></button>
+        </div>
+        <span class="toolbar-divider"></span>
+        <button id="slow" class="time-button" title="スローモーション（S）" aria-label="スローモーション" aria-pressed="false"><span>1×</span><small>SPEED</small></button>
+        <button id="pause" class="icon-button pause-button" title="一時停止（Space）" aria-label="一時停止" aria-pressed="false"><svg class="icon"><use href="#i-pause"/></svg></button>
+      </nav>
+      <div class="camera-note"><span class="desktop-instruction">何もない場所をドラッグで視点移動 <span>·</span> スクロールでズーム</span><span class="mobile-instruction">2本指で回転・ピンチでズーム</span></div>
+    </div>
+
+    <div class="reset-wrap"><span class="micro">A FRESH START, ANYTIME.</span><button id="reset" class="reset-button" title="部品の山を積み直す（R）"><span>積み直す</span><svg class="icon"><use href="#i-reset"/></svg></button></div>
+
+    <footer class="statusbar"><span><span class="status-light"></span><span id="simulation-state">LIVE SIMULATION</span></span><span class="footer-center">STEEL. BRASS. A LITTLE CHAOS.</span><span id="status-detail">WEBGL 2.0 <span>/</span> REAL-TIME</span></footer>
+    <div id="hover-label" class="hover-label" hidden><span id="hover-en"></span><small id="hover-ja"></small></div>
+    <div id="gesture-indicator" class="gesture-indicator" hidden><svg><circle class="charge-track" cx="30" cy="30" r="26"/><circle id="charge-arc" cx="30" cy="30" r="26"/></svg><span>+</span></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <section id="settings" class="settings-panel" aria-label="設定" hidden>
+      <div class="panel-title"><div><span class="micro">MAKE IT YOURS</span><h2>この世界の設定</h2></div><button class="icon-button" id="settings-close" aria-label="設定を閉じる"><svg class="icon"><use href="#i-close"/></svg></button></div>
+      <label for="quality">描画品質 <span id="quality-label">1,200 PARTS</span></label>
+      <select id="quality"><option value="light">軽量 — 650 個</option><option value="standard" selected>標準 — 1,200 個</option><option value="high">高精細 — 2,000 個</option></select>
+      <p class="setting-help">品質を変えると、部品の山を積み直します。</p>
+      <label for="volume">金属音の音量 <span id="volume-value">35%</span></label><input type="range" id="volume" min="0" max="100" value="35">
+      <div class="setting-row"><label for="auto-rotate">ゆっくり自動回転</label><input type="checkbox" id="auto-rotate" role="switch" checked></div>
+      <button id="reset-camera" class="text-button">最初の視点に戻す <svg class="icon"><use href="#i-reset"/></svg></button>
+      <button id="fullscreen" class="text-button">全画面で遊ぶ <svg class="icon"><use href="#i-expand"/></svg></button>
+      <p class="settings-foot">動きが重いときは「軽量」をお試しください。<br>音はオンにしてから鳴ります。</p>
+    </section>
+  </main>
+
+  <dialog id="help" class="help-dialog">
+    <div class="panel-title"><div><span class="micro">A SMALL GUIDE TO MAKING A MESS</span><h2>正解のない、遊び方。</h2></div><button class="icon-button" id="help-close" aria-label="操作ガイドを閉じる"><svg class="icon"><use href="#i-close"/></svg></button></div>
+    <p class="help-intro">ネジも、歯車も、スパナも。<br>ここにあるものは、全部触れます。</p>
+    <div class="guide-row"><svg class="icon"><use href="#i-hand"/></svg><div><h3>つかんで、投げる。</h3><p>部品をドラッグ。上に引き上げて、勢いよく放してみてください。</p></div><kbd>G</kbd></div>
+    <div class="guide-row"><svg class="icon"><use href="#i-blast"/></svg><div><h3>ためて、崩す。</h3><p>衝撃モードで長押し。長くためるほど、大きく散らばります。</p></div><kbd>B</kbd></div>
+    <div class="guide-row"><svg class="icon"><use href="#i-magnet"/></svg><div><h3>引き寄せて、ほどく。</h3><p>磁石モードで長押しして移動。離すと、集まった部品が落ちます。</p></div><kbd>M</kbd></div>
+    <div class="guide-row"><svg class="icon"><use href="#i-orbit"/></svg><div><h3>角度を変えて、眺める。</h3><p>空いた場所・右ドラッグで回転、ホイールでズーム。スマホは2本指で回転・ピンチ。</p></div><kbd>O</kbd></div>
+    <div class="shortcut-row"><span><kbd>Space</kbd> 停止</span><span><kbd>S</kbd> スロー</span><span><kbd>X</kbd> 散らす</span><span><kbd>R</kbd> 積み直す</span></div>
+    <p class="physics-note">手触りを楽しむための近似物理シミュレーションです。穴・ねじ山の精密な衝突や、材質ごとの磁性は再現していません。</p>
+    <button id="help-start" class="dialog-start">さわってみる <svg class="icon"><use href="#i-arrow"/></svg></button>
+  </dialog>
+
+  <div id="loading" class="loading-screen"><div class="loading-brand">HEAVY <span>/</span> PLAY</div><div class="loading-track"><i></i></div><span id="loading-message">金属を並べています。</span></div>
+  <div id="error" class="error-panel" hidden><div><span class="micro">A LITTLE TECHNICAL TROUBLE</span><h2>3Dの世界を開けませんでした。</h2><p id="error-message">WebGL 2 に対応したブラウザで開いてください。</p><button onclick="location.reload()" class="reset-button">もう一度開く <svg class="icon"><use href="#i-reset"/></svg></button></div></div>
+  <noscript><div class="error-panel"><div>この作品を動かすには、JavaScriptを有効にしてください。</div></div></noscript>
+  <script defer src="./js/app.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync,existsSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createServer} from 'node:http';
+import {handler} from '../scripts/serve.mjs';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const html=readFileSync(resolve(root,'index.html'),'utf8');
+test('distribution separates HTML, CSS, and classic JavaScript',()=>{assert.match(html,/<link rel="stylesheet" href="\.\/css\/style\.css">/);assert.match(html,/<script defer src="\.\/js\/app\.bundle\.js"><\/script>/);assert.doesNotMatch(html,/<script type="module"/);assert.ok(existsSync(resolve(root,'js/app.bundle.js')));});
+test('there are no external runtime scripts, stylesheets, or fonts',()=>{assert.doesNotMatch(html,/(?:src|href)=["']https?:\/\//);const css=readFileSync(resolve(root,'css/style.css'),'utf8');assert.doesNotMatch(css,/@import|@font-face|url\(["']?https?:/);});
+test('the bundle contains no unresolved JavaScript imports',()=>{const code=readFileSync(resolve(root,'js/app.bundle.js'),'utf8');assert.doesNotMatch(code,/^import\s/m);assert.doesNotMatch(code,/\bfetch\(/);assert.match(code,/SNAPSHOTS/);});
+test('all essential controls, accessibility hooks, and error fallback exist',()=>{for(const id of ['world','scatter','pour','reset','slow','pause','sound','quality','help','error'])assert.ok(html.includes(`id="${id}"`));assert.match(html,/aria-live="polite"/);assert.match(html,/aria-pressed="true"/);assert.match(html,/<dialog/);assert.match(html,/<noscript>/);});
+test('local server serves files and handles invalid requests',async()=>{const server=createServer(handler);await new Promise(r=>server.listen(0,'127.0.0.1',r));const base=`http://127.0.0.1:${server.address().port}`;try{let r=await fetch(base+'/');assert.equal(r.status,200);assert.match(r.headers.get('content-type'),/text\/html/);r=await fetch(base+'/js/app.bundle.js');assert.equal(r.status,200);assert.match(r.headers.get('content-type'),/javascript/);r=await fetch(base+'/css/style.css',{method:'HEAD'});assert.equal(r.status,200);assert.equal(await r.text(),'');assert.equal((await fetch(base+'/missing')).status,404);assert.equal((await fetch(base+'/%XX')).status,400);assert.equal((await fetch(base+'/%2e%2e%2fsecret.txt')).status,403);assert.equal((await fetch(base+'/',{method:'POST'})).status,405);}finally{await new Promise(r=>server.close(r));}});
