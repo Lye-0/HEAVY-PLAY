@@ -30,8 +30,8 @@
         "frames": 2880,
         "start": 0.0065,
         "duration": 0.09,
-        "gain": 0.41022710627279335,
-        "pcmSha256": "18d9d68a63bb86009f082f4b1444338996f5dad4481632ed7ee9da36e31cec58"
+        "gain": 0.29536351651641124,
+        "pcmSha256": "c6be7e1b6e2575e2726b92754a8555978b4f0de75b8c38ac0adc4718acf32408"
       },
       {
         "id": "light-04",
@@ -62,8 +62,8 @@
         "frames": 5760,
         "start": 0.0065,
         "duration": 0.18,
-        "gain": 0.6073696444152258,
-        "pcmSha256": "1a8ddce0d41727fa67b814fce9630e03cefd1d37960b1e6cc94aea3f686da7a3"
+        "gain": 0.43730614397896256,
+        "pcmSha256": "b47f25f4806108a23df853973503cc69214df44e913024e02da5319d6b3dd1df"
       },
       {
         "id": "medium-02",
@@ -72,8 +72,8 @@
         "frames": 3200,
         "start": 0.0825,
         "duration": 0.1,
-        "gain": 0.45465888929476916,
-        "pcmSha256": "08092c43a86b1dfba9087c71e16d1d261daba5e00ba0df2e1c593f8dbd894d3e"
+        "gain": 0.32735440029223384,
+        "pcmSha256": "bf97c703a4418d3aeeecfb40e82e63a24c41040bbe97317d66245f2e2e49ef18"
       },
       {
         "id": "medium-03",
@@ -114,8 +114,8 @@
         "frames": 4480,
         "start": 0.0825,
         "duration": 0.14,
-        "gain": 0.5910565560832,
-        "pcmSha256": "0ae9903a7548cc5ab7ce01edff1a5acf0254415d25e8160f7fb9a1b9928f55be"
+        "gain": 0.425560720379904,
+        "pcmSha256": "d81fad0cbf2fcd765ded78c91f21a7913c7a6db4d735a97c85c789083eb66baa"
       },
       {
         "id": "heavy-02",
@@ -124,8 +124,8 @@
         "frames": 6080,
         "start": 0.0225,
         "duration": 0.19,
-        "gain": 0.7547253449089607,
-        "pcmSha256": "9987baf99af453dc4aceaf659fc46cbe69f10b6f2fc2efe51a2a8ddca1cbbedd"
+        "gain": 0.5434022483344518,
+        "pcmSha256": "f7c397d3c67b5e636e6afc1e6e716e030a579361355895f53bff206a09cff2b0"
       },
       {
         "id": "heavy-03",
@@ -134,8 +134,8 @@
         "frames": 6400,
         "start": 0.2185,
         "duration": 0.2,
-        "gain": 0.6386857584527593,
-        "pcmSha256": "6161baf35fd07729e17b5d89398a28bf4bd2c721f6bf9679b54a118bad373e59"
+        "gain": 0.4598537460859867,
+        "pcmSha256": "b8ca87d9eed412afc48b31f2f9b29d14b5abce1d39ca4d07dd6f815c7f2fe78d"
       },
       {
         "id": "heavy-04",
@@ -144,8 +144,8 @@
         "frames": 6400,
         "start": 0.0065,
         "duration": 0.2,
-        "gain": 0.7895805377397935,
-        "pcmSha256": "e8f012c664164ae8375179bc1eda819c0ed1751a385b3a436692a24c070b3145"
+        "gain": 0.5684979871726513,
+        "pcmSha256": "a07d9e093b77a9eee0750c2bffdb4576e78a94341f7c5c3dd50459419d3abfc6"
       }
     ],
     "floor": [
@@ -157,7 +157,20 @@
         "start": 0.1865,
         "duration": 0.16,
         "gain": 0.8668996653404589,
-        "pcmSha256": "d117a841b5f3471a820994eb4aa1de199d54deda87ea982924f19f223f82f13f"
+        "pcmSha256": "43ce94481ccbce8b29a1ff8f8261cdb6afeafb39667c0079dface59777b24cb8",
+        "layers": [
+          {
+            "source": "coins-spill-04",
+            "startSample": 848,
+            "frames": 5120,
+            "start": 0.0265,
+            "duration": 0.16,
+            "gain": 0.08512620388094028,
+            "maxRelativeAmplitude": 0.1,
+            "fadeIn": 0.00035,
+            "fadeOut": 0.014
+          }
+        ]
       },
       {
         "id": "floor-02",
@@ -167,7 +180,20 @@
         "start": 0.4385,
         "duration": 0.12,
         "gain": 1.6487922332973448,
-        "pcmSha256": "6da220ae81fa87de2a17dee0a692fb460ff261f8db7c95ecc3d7468008912dc4"
+        "pcmSha256": "4998524420186076f49520a19590c234b9c34276df6fbbceaf575dc769cc3e7d",
+        "layers": [
+          {
+            "source": "coins-spill-04",
+            "startSample": 6736,
+            "frames": 3840,
+            "start": 0.2105,
+            "duration": 0.12,
+            "gain": 0.08557469991314344,
+            "maxRelativeAmplitude": 0.1,
+            "fadeIn": 0.00035,
+            "fadeOut": 0.014
+          }
+        ]
       },
       {
         "id": "floor-03",
@@ -177,7 +203,20 @@
         "start": 0.0785,
         "duration": 0.17,
         "gain": 1.4253279972275679,
-        "pcmSha256": "df1f20bc8dba96e221639fd76d4fda7ecbe0d3e1cb820d0338962aaa7fac2167"
+        "pcmSha256": "e922eb7fe11b0f99950f1837b55a8317eedd07ee117ab0071c2b8154958d59df",
+        "layers": [
+          {
+            "source": "coins-spill-04",
+            "startSample": 12368,
+            "frames": 5440,
+            "start": 0.3865,
+            "duration": 0.17,
+            "gain": 0.06579228063611359,
+            "maxRelativeAmplitude": 0.1,
+            "fadeIn": 0.00035,
+            "fadeOut": 0.014
+          }
+        ]
       },
       {
         "id": "floor-04",
@@ -187,7 +226,20 @@
         "start": 0.3585,
         "duration": 0.15,
         "gain": 0.8714733521032259,
-        "pcmSha256": "39210b1192faf854fb7b364a6db97af0e6ae0b898ab5ff6c5f3e527d25dd842f"
+        "pcmSha256": "e5fd4aa5bf825dcaa6cd2c9ef8db92e9cbb0962eb6a94facf184228d26b13748",
+        "layers": [
+          {
+            "source": "coins-spill-04",
+            "startSample": 22608,
+            "frames": 4800,
+            "start": 0.7065,
+            "duration": 0.15,
+            "gain": 0.10599418473580212,
+            "maxRelativeAmplitude": 0.1,
+            "fadeIn": 0.00035,
+            "fadeOut": 0.014
+          }
+        ]
       },
       {
         "id": "floor-05",
@@ -197,7 +249,20 @@
         "start": 0.8505,
         "duration": 0.12,
         "gain": 0.8287947341992995,
-        "pcmSha256": "6f86ca28c8ab6c06355eceb6b592274a3913e9b02198a16c12132a469c0fc9e1"
+        "pcmSha256": "9cf34f80c704aaa82e6721bacbb497517aeeb767ee602e57d9b523a0df601dba",
+        "layers": [
+          {
+            "source": "coins-spill-04",
+            "startSample": 31056,
+            "frames": 3840,
+            "start": 0.9705,
+            "duration": 0.12,
+            "gain": 0.22580144174244715,
+            "maxRelativeAmplitude": 0.1,
+            "fadeIn": 0.00035,
+            "fadeOut": 0.014
+          }
+        ]
       },
       {
         "id": "floor-06",
@@ -207,7 +272,20 @@
         "start": 0.0265,
         "duration": 0.18,
         "gain": 0.6693755372888859,
-        "pcmSha256": "8e7fb5d7ae3d797fe34e31687e272261999a01d380ecfa4f50964a5a1a5b7c6c"
+        "pcmSha256": "ae251c99ff9064febb6b9d802ea3b47972d9596883cf3dfdae933918d17309ed",
+        "layers": [
+          {
+            "source": "coins-spill-04",
+            "startSample": 46288,
+            "frames": 5760,
+            "start": 1.4465,
+            "duration": 0.18,
+            "gain": 0.1114536481333472,
+            "maxRelativeAmplitude": 0.1,
+            "fadeIn": 0.00035,
+            "fadeOut": 0.014
+          }
+        ]
       }
     ]
   }
