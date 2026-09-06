@@ -7,7 +7,7 @@ import {CATALOG,chooseType} from './catalog.js';
  * Thread grooves / holes are visual geometry, not precision collision meshes.
  */
 export class World {
- constructor(count=1200,seed=417){this.seed=seed;this.bodies=[];this.time=0;this.onImpact=null;this.impactBudget=0;this.active=0;this.random=rng(seed);this.create(count);}
+ constructor(count=1200,seed=417){this.seed=seed;this.bodies=[];this.time=0;this.onImpact=null;this.impactBudget=0;this.floorImpactBudget=0;this.active=0;this.random=rng(seed);this.create(count);}
  create(count){
   const r=this.random,R=4.65*Math.cbrt(count/1200),H=9.0*Math.cbrt(count/1200);
   for(let i=0;i<count;i++){
@@ -17,10 +17,10 @@ export class World {
   }
  }
  add(type,p,q,scale=1,metal=0){const c=CATALOG[type],mass=c.mass*scale**3;
-  const b={id:this.bodies.length,type,p:p.slice(),q:q.slice(),v:[0,0,0],w:[0,0,0],scale,metal,r:c.radius*scale,h:c.half*scale,mass,im:1/mass,ii:.24/(mass*(.4*(c.radius*scale)**2+(c.half*scale)**2/3+.01)),axis:[0,1,0],sleep:false,sleepTime:0,contact:false,highlight:0,shade:.90+this.random()*.12};
+  const b={id:this.bodies.length,type,p:p.slice(),q:q.slice(),v:[0,0,0],w:[0,0,0],scale,metal,r:c.radius*scale,h:c.half*scale,mass,im:1/mass,ii:.24/(mass*(.4*(c.radius*scale)**2+(c.half*scale)**2/3+.01)),axis:[0,1,0],sleep:false,sleepTime:0,contact:false,floorContact:false,wasFloorContact:false,highlight:0,shade:.90+this.random()*.12};
   b.axis=rotate(b.q,[0,1,0]);this.bodies.push(b);return b;
  }
- applySnapshot(snapshot){for(let i=0;i<this.bodies.length;i++){const b=this.bodies[i],j=i*7;if(j+6>=snapshot.length)break;b.p=[snapshot[j],snapshot[j+1],snapshot[j+2]];b.q=snapshot.slice(j+3,j+7);b.axis=rotate(b.q,[0,1,0]);b.v.fill(0);b.w.fill(0);b.sleep=true;}this.active=0;}
+ applySnapshot(snapshot){for(let i=0;i<this.bodies.length;i++){const b=this.bodies[i],j=i*7;if(j+6>=snapshot.length)break;b.p=[snapshot[j],snapshot[j+1],snapshot[j+2]];b.q=snapshot.slice(j+3,j+7);b.axis=rotate(b.q,[0,1,0]);b.v.fill(0);b.w.fill(0);b.sleep=true;b.floorContact=false;b.wasFloorContact=false;}this.active=0;}
  snapshot(){return this.bodies.flatMap(b=>[...b.p,...b.q].map(v=>+v.toFixed(5)));}
  wakeAll(){for(const b of this.bodies){b.sleep=false;b.sleepTime=0;}}
  wake(b){b.sleep=false;b.sleepTime=0;}
@@ -29,8 +29,8 @@ export class World {
  magnet(p,dt){let n=0;for(const b of this.bodies){const dx=p[0]-b.p[0],dy=p[1]-b.p[1],dz=p[2]-b.p[2],d=Math.hypot(dx,dy,dz);if(d>7.5)continue;this.wake(b);const k=24*(1-d/9),drag=Math.exp(-3*dt);for(let j=0;j<3;j++)b.v[j]=(b.v[j]+clamp((p[j]-b.p[j])*k,-65,65)*dt)*drag;b.v[1]+=19*dt;n++;}return n;}
  pull(b,p,dt){this.wake(b);for(let k=0;k<3;k++){const a=clamp((p[k]-b.p[k])*105-b.v[k]*16,-160,160);b.v[k]+=a*dt;}b.v[1]+=19*dt;}
  step(dt=1/60,iterations=4){
-  this.time+=dt;this.impactBudget=3;let active=0;
-  for(const b of this.bodies){if(b.sleep)continue;active++;b.contact=false;b.v[1]-=19*dt;
+  this.time+=dt;this.impactBudget=4;this.floorImpactBudget=3;let active=0;
+  for(const b of this.bodies){if(b.sleep)continue;active++;b.wasFloorContact=b.floorContact;b.floorContact=false;b.contact=false;b.v[1]-=19*dt;
    for(let k=0;k<3;k++){b.v[k]=clamp(b.v[k]*.999,-32,32);b.w[k]=clamp(b.w[k]*.995,-30,30);b.p[k]+=b.v[k]*dt;}
    integrateQuat(b.q,b.w,dt);b.axis=rotate(b.q,[0,1,0]);
    const rad=Math.hypot(b.p[0],b.p[2]);if(rad>23){b.v[0]-=b.p[0]/rad*(rad-23)*dt*14;b.v[2]-=b.p[2]/rad*(rad-23)*dt*14;}
@@ -80,7 +80,7 @@ export class World {
   a.v[0]+=jx*ia;a.v[1]+=jy*ia;a.v[2]+=jz*ia;b.v[0]-=jx*ib;b.v[1]-=jy*ib;b.v[2]-=jz*ib;
   a.w[0]+=(ay*jz-az*jy)*ai;a.w[1]+=(az*jx-ax*jz)*ai;a.w[2]+=(ax*jy-ay*jx)*ai;b.w[0]-=(by*jz-bz*jy)*bi;b.w[1]-=(bz*jx-bx*jz)*bi;b.w[2]-=(bx*jy-by*jx)*bi;
   if(Math.abs(vn)<1.2){for(let k=0;k<3;k++){a.w[k]*=.95;b.w[k]*=.95;}a.v[0]*=.992;a.v[2]*=.992;b.v[0]*=.992;b.v[2]*=.992;}
-  if(sound&&vn<-2.4&&this.onImpact&&this.impactBudget-->0)this.onImpact(-vn,a);
+  if(sound&&vn<-2.4&&this.onImpact&&this.impactBudget-->0)this.onImpact(-vn,a.mass>=b.mass?a:b,'metal');
  }
  floor(b,sound){
   const c=CATALOG[b.type],u=b.axis,ry=c.ext[1]*b.scale,rr=c.ext[0]*b.scale;
@@ -94,12 +94,12 @@ export class World {
    rx=u[0]*sign*ry+u[0]*u[1]*f;hy=u[1]*sign*ry+(-1+u[1]*u[1])*f;rz=u[2]*sign*ry+u[2]*u[1]*f;
   }
   const ground=Math.hypot(b.p[0],b.p[2])>11.03?-.24:0,depth=ground-(b.p[1]+hy);if(depth<=0)return;
-  b.contact=true;b.p[1]+=depth*.88;
+  b.contact=true;b.floorContact=true;b.p[1]+=depth*.88;
   const vy=b.v[1]+b.w[2]*rx-b.w[0]*rz;
   if(vy<0){const j=-(1+(vy<-1.8?.22:0))*vy/(b.im+(rx*rx+rz*rz)*b.ii);b.v[1]+=j*b.im;b.w[0]-=rz*j*b.ii;b.w[2]+=rx*j*b.ii;
    const vx=b.v[0]+b.w[1]*rz-b.w[2]*hy,vz=b.v[2]+b.w[0]*hy-b.w[1]*rx,vl=Math.hypot(vx,vz);
    if(vl>.0001){const f=Math.min(j*.68,vl/(b.im+(rx*rx+hy*hy+rz*rz)*b.ii)),fx=-vx/vl*f,fz=-vz/vl*f;b.v[0]+=fx*b.im;b.v[2]+=fz*b.im;b.w[0]+=hy*fz*b.ii;b.w[1]+=(rz*fx-rx*fz)*b.ii;b.w[2]-=hy*fx*b.ii;}
-   if(sound&&vy<-2&&this.onImpact&&this.impactBudget-->0)this.onImpact(-vy,b);
+   if(sound&&!b.wasFloorContact&&vy<-1.8&&this.onImpact&&this.floorImpactBudget-->0)this.onImpact(-vy,b,'floor');
   }
   b.w[0]*=.965;b.w[1]*=.965;b.w[2]*=.965;
  }

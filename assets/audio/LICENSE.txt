@@ -1,0 +1,10 @@
+Audio provenance notice
+
+The audio recordings in source/ were supplied for use in HEAVY / PLAY.
+Original filenames and file checksums are preserved in sources.json.
+
+The recordings retain the rights and license terms of their original sources.
+Processing, renaming, and embedding these recordings does not grant a new
+license to them. The repository's MIT code license does not relicense audio.
+
+Prepared excerpts are mapped to their original recordings in cues.json.

@@ -1,0 +1,186 @@
+[
+  {
+    "id": "coins-drop-02",
+    "originalName": "coin2.mp3",
+    "file": "source/coins-drop-02.mp3",
+    "sha256": "e18ac60790d2b09bb8e0eaeb749526ade604dcbcd7739284ec13fe5dc62c8ada",
+    "duration": 1.55309375,
+    "originalChannels": 2
+  },
+  {
+    "id": "metal-strike-02",
+    "originalName": "gakin2.mp3",
+    "file": "source/metal-strike-02.mp3",
+    "sha256": "3bd75780ec7b8013213eda872779fa07e7ea914c6615752d8034b72bc4f1dcc8",
+    "duration": 1.74165625,
+    "originalChannels": 2
+  },
+  {
+    "id": "metal-hit-short",
+    "originalName": "kin.mp3",
+    "file": "source/metal-hit-short.mp3",
+    "sha256": "16657dfde38f31b1314753005f5ee1e58ddc11a1337f76ebd5dc80cd203d44da",
+    "duration": 0.32478125,
+    "originalChannels": 1
+  },
+  {
+    "id": "keys-pickup",
+    "originalName": "pickupkey.mp3",
+    "file": "source/keys-pickup.mp3",
+    "sha256": "c74f8d83502d4b9ac7d16b3d56af2af67d9361453fc62f2bbc75915a7bd8905a",
+    "duration": 1.19453125,
+    "originalChannels": 2
+  },
+  {
+    "id": "coins-purse",
+    "originalName": "saif.mp3",
+    "file": "source/coins-purse.mp3",
+    "sha256": "f09f4f093b29d11f84fc051255bf8e90c49f80336b64677fdb5beb41f50171ef",
+    "duration": 0.82765625,
+    "originalChannels": 1
+  },
+  {
+    "id": "cutlery-drop-06",
+    "originalName": "sei_ge_fokusupun_otosu06.mp3",
+    "file": "source/cutlery-drop-06.mp3",
+    "sha256": "2dba6bd38fa1c6eb8342510869935d904ae4f42c0875858eccea33cf3e671a3c",
+    "duration": 2.429375,
+    "originalChannels": 1
+  },
+  {
+    "id": "metal-rod-01",
+    "originalName": "se_kinzoku_bou01.wav",
+    "file": "source/metal-rod-01.wav",
+    "sha256": "94107bc67376a8d648df22d80d95fe0cc0e26541fc208618eac0e1bb5a26f6f1",
+    "duration": 1.28,
+    "originalChannels": 2
+  },
+  {
+    "id": "metal-rod-04",
+    "originalName": "se_kinzoku_bou04.wav",
+    "file": "source/metal-rod-04.wav",
+    "sha256": "aadf43ccf138466ffe3b2fe69a8c67c61492fe6ac7dacd00725499137cd597b5",
+    "duration": 1.38446875,
+    "originalChannels": 2
+  },
+  {
+    "id": "cutlery-clatter",
+    "originalName": "supukara.mp3",
+    "file": "source/cutlery-clatter.mp3",
+    "sha256": "2fc689a8d1584415012d23d68ff2a2ca49493fd2d0fe7e0d3af18508a6242d53",
+    "duration": 1.39715625,
+    "originalChannels": 2
+  },
+  {
+    "id": "blade-drop",
+    "originalName": "swordrop.mp3",
+    "file": "source/blade-drop.mp3",
+    "sha256": "e889c10b6b3b49ff0eaa67fe028f330e529d711ec9fcb43b0dc3fe131f6111eb",
+    "duration": 1.30596875,
+    "originalChannels": 2
+  },
+  {
+    "id": "coins-drop",
+    "originalName": "お金を落とす.mp3",
+    "file": "source/coins-drop.mp3",
+    "sha256": "1b8f53c3e3baa08aa31f5b2bcd1f9c6c971e36a34bc7683939d086501ebf2bdf",
+    "duration": 0.75753125,
+    "originalChannels": 1
+  },
+  {
+    "id": "coins-rattle-01",
+    "originalName": "お金ジャラジャラ1.mp3",
+    "file": "source/coins-rattle-01.mp3",
+    "sha256": "f64dcca97e38f304ed09e6d7d4085fdfa9d5d2e265f9aae7eeef9cfe97791e64",
+    "duration": 1.12325,
+    "originalChannels": 1
+  },
+  {
+    "id": "coins-rattle-03",
+    "originalName": "お金ジャラジャラ3.mp3",
+    "file": "source/coins-rattle-03.mp3",
+    "sha256": "0e31e59bea7ca3068d0870dce577f98f764b5c77790e56e1240f89a87d882846",
+    "duration": 2.06365625,
+    "originalChannels": 1
+  },
+  {
+    "id": "coins-roll-01",
+    "originalName": "お金転がる.mp3",
+    "file": "source/coins-roll-01.mp3",
+    "sha256": "efc3c55dde0df8288b804e6b0a14d2b137833876a4b35cbcd985288b26639093",
+    "duration": 2.56,
+    "originalChannels": 1
+  },
+  {
+    "id": "coins-roll-02",
+    "originalName": "お金転がる2.mp3",
+    "file": "source/coins-roll-02.mp3",
+    "sha256": "b31001650e39441f13740d22dc29bf1ea703ba48ab9d967a56234f6d2e957ab2",
+    "duration": 2.19428125,
+    "originalChannels": 1
+  },
+  {
+    "id": "cutlery-drop-01",
+    "originalName": "スプーン・フォーク・落とす01.mp3",
+    "file": "source/cutlery-drop-01.mp3",
+    "sha256": "013dfbfd46711d079aca1dbe813e05a96a16f6f011ff0e1ce807f1a13e055467",
+    "duration": 1.35834375,
+    "originalChannels": 1
+  },
+  {
+    "id": "cutlery-drop-02",
+    "originalName": "スプーン・フォーク・落とす02.mp3",
+    "file": "source/cutlery-drop-02.mp3",
+    "sha256": "2b306223584d13fb76d9e1f224e9206349ba54a68b7187b4040bc5d36cb47811",
+    "duration": 1.51509375,
+    "originalChannels": 1
+  },
+  {
+    "id": "cutlery-drop-echo",
+    "originalName": "スプーン・フォーク・落とす（エコー）.mp3",
+    "file": "source/cutlery-drop-echo.mp3",
+    "sha256": "4c9a092b7e86448ee1d6c1181bc11a169f2f7114ac17c55ec00752481fc5d29c",
+    "duration": 5.40734375,
+    "originalChannels": 1
+  },
+  {
+    "id": "coins-spill-01",
+    "originalName": "小銭をばらまいた音1.mp3",
+    "file": "source/coins-spill-01.mp3",
+    "sha256": "a83fec9e36f572c76a9629e419f3132d71b8cb05c9d8a8371e00491b1dee1103",
+    "duration": 2.08978125,
+    "originalChannels": 2
+  },
+  {
+    "id": "coins-spill-02",
+    "originalName": "小銭をばらまいた音2.mp3",
+    "file": "source/coins-spill-02.mp3",
+    "sha256": "0a23c46eaaf15da4a80793dddae52ef6516e51672dfebe894d26b6b8b08c8f18",
+    "duration": 2.08978125,
+    "originalChannels": 2
+  },
+  {
+    "id": "coins-spill-03",
+    "originalName": "小銭をばらまいた音3.mp3",
+    "file": "source/coins-spill-03.mp3",
+    "sha256": "0230a3d136369c84c50b0ccd33e813ebb1af5266f6cec8456bf8499a26cf7053",
+    "duration": 2.08978125,
+    "originalChannels": 2
+  },
+  {
+    "id": "coins-spill-04",
+    "originalName": "小銭をばらまいた音4.mp3",
+    "file": "source/coins-spill-04.mp3",
+    "sha256": "f0b77f52f90545b8c4f30b9d6ce49cfdfa28686fc1113ca92479f894f12b5b5b",
+    "duration": 2.82121875,
+    "originalChannels": 2
+  },
+  {
+    "id": "coins-purse-tip",
+    "originalName": "財布ひっくりかえす.mp3",
+    "file": "source/coins-purse-tip.mp3",
+    "sha256": "023496f6fe01f509ec1b1fa4a23871ff5a04474bfc775407e0a8960e10be9507",
+    "duration": 1.071,
+    "originalChannels": 1
+  }
+]

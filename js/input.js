@@ -53,7 +53,7 @@ export class Interaction {
  up(e){const g=this.gesture;
   if(g&&g.id===e.pointerId){
    if(g.type==='grab'){
-    if(g.moved<6){const d=this.app.renderer.ray(e.clientX,e.clientY).direction;g.body.v=[d[0]*3,4.5,d[2]*3];g.body.w=[3,-2,4];this.app.audio.impact(3,g.body);}
+    if(g.moved<6){const d=this.app.renderer.ray(e.clientX,e.clientY).direction;g.body.v=[d[0]*3,4.5,d[2]*3];g.body.w=[3,-2,4];}
     else if(performance.now()-g.lastMove<140)g.body.v=g.velocity.map((v,k)=>clamp(v*.78+g.body.v[k]*.38,-27,27));
    }
    if(g.type==='blast'){const power=.50+clamp((performance.now()-g.start)/1300,0,1)*1.45;this.app.blast(g.point,power);}
