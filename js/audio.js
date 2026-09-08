@@ -8,10 +8,10 @@ const MAX_VOICES=32;
 export class MetalAudio {
  constructor(){
   this.enabled=false;this.volume=.35;this.ctx=null;this.master=null;this.bus=null;
-  this.bank={};this.voices=new Set();this.lastByBody=new WeakMap();this.lastVariant={};this.tokens=8;this.tokenTime=0;
+  this.bank={};this.voices=new Set();this.recentBodies=new Map();this.lastByBody=new WeakMap();this.lastVariant={};this.tokens=8;this.tokenTime=0;
  }
  initialize(ctx){
-  this.ctx=ctx;this.bus=ctx.createGain();this.lastByBody=new WeakMap();this.lastVariant={};this.tokens=8;this.tokenTime=ctx.currentTime;
+  this.ctx=ctx;this.bus=ctx.createGain();this.recentBodies.clear();this.lastByBody=new WeakMap();this.lastVariant={};this.tokens=8;this.tokenTime=ctx.currentTime;
   const high=ctx.createBiquadFilter();high.type='highpass';high.frequency.value=55;high.Q.value=.6;
   const low=ctx.createBiquadFilter();low.type='lowpass';low.frequency.value=13500;low.Q.value=.6;
   const comp=ctx.createDynamicsCompressor();comp.threshold.value=-14;comp.knee.value=8;comp.ratio.value=4;comp.attack.value=.002;comp.release.value=.07;
@@ -26,7 +26,7 @@ export class MetalAudio {
  }
  async toggle(){
   if(this.enabled){
-   this.enabled=false;this.setVolume(this.volume);
+   this.enabled=false;this.recentBodies.clear();this.setVolume(this.volume);
    const stop=this.ctx.currentTime+.03;for(const voice of this.voices)voice.source.stop(stop);
    return false;
   }
@@ -50,6 +50,8 @@ export class MetalAudio {
   this.tokens--;this.lastByBody.set(body,{time:now,strength,surface});this.playImpact(strength,body,now+Math.random()*.003,surface);
  }
  playImpact(strength,body,when=this.ctx.currentTime,surface='metal'){
+  for(const [recent,time]of this.recentBodies)if(when-time>.25)this.recentBodies.delete(recent);
+  this.recentBodies.set(body,when);
   const mass=body.mass||CATALOG[body.type]?.mass||1,force=strength*Math.sqrt(mass);
   const group=surface==='floor'?'floor':(force>6.5?'heavy':force>2.2||mass>1.5?'medium':'light');
   const rate=clamp((.985+Math.random()*.03)/Math.pow(body.scale||1,.1),.93,1.07);
@@ -63,7 +65,10 @@ export class MetalAudio {
   const source=this.ctx.createBufferSource(),gain=this.ctx.createGain();
   const pan=this.ctx.createStereoPanner?this.ctx.createStereoPanner():this.ctx.createGain();
   source.buffer=variants[index];
-  source.playbackRate.value=rate;gain.gain.value=level;
+  source.playbackRate.value=rate;
+  const count=[...this.recentBodies.values()].filter(time=>when-time<=.25).length;
+  const activity=clamp((count-2)/6,0,1),sparseGain=.03+.97*activity*activity*(3-2*activity);
+  gain.gain.value=level*(METAL_SAMPLES.actualMetalVariants[group][index]?sparseGain:1);
   if(pan.pan)pan.pan.value=clamp(x/10,-.85,.85);
   source.connect(gain);gain.connect(pan);pan.connect(this.bus);
   const voice={source,gain,pan,group,surface,index,when};this.voices.add(voice);
@@ -71,10 +76,12 @@ export class MetalAudio {
   source.start(when);return voice;
  }
  silence(){
+  this.recentBodies.clear();
   if(!this.ctx)return;const now=this.ctx.currentTime;
   for(const {source,gain}of this.voices){gain.gain.cancelScheduledValues(now);gain.gain.setValueAtTime(gain.gain.value,now);gain.gain.linearRampToValueAtTime(0,now+.02);source.stop(now+.025);}
  }
  clearVoices(){
+  this.recentBodies.clear();
   for(const {source,gain,pan}of this.voices){source.onended=null;source.stop();source.disconnect();gain.disconnect();pan.disconnect();}
   this.voices.clear();
  }

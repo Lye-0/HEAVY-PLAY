@@ -5,13 +5,16 @@
     "light": [
       {
         "id": "light-01",
-        "source": "keys-pickup",
-        "startSample": 2128,
-        "frames": 2720,
-        "start": 0.0665,
-        "duration": 0.085,
-        "gain": 2.902076888052116,
-        "pcmSha256": "43fff97dbaa9c6f0641a458b02f05014367dd648f03d3b3472a40de1b35dbcbf"
+        "source": "actual-metal",
+        "startSample": 92496,
+        "frames": 4960,
+        "start": 2.8905,
+        "duration": 0.155,
+        "gain": 1.6388856392277718,
+        "pcmSha256": "6e4d39bd8593e7a78d94a45ab42bd764981b69da31c7fbb1a7ad7155b32d8b90",
+        "fadeIn": 0.00035,
+        "fadeOut": 0.1085,
+        "fadeOutCurve": "half-cosine"
       },
       {
         "id": "light-02",
@@ -25,23 +28,29 @@
       },
       {
         "id": "light-03",
-        "source": "metal-hit-short",
-        "startSample": 208,
-        "frames": 2880,
-        "start": 0.0065,
-        "duration": 0.09,
-        "gain": 0.29536351651641124,
-        "pcmSha256": "c6be7e1b6e2575e2726b92754a8555978b4f0de75b8c38ac0adc4718acf32408"
+        "source": "actual-metal",
+        "startSample": 97616,
+        "frames": 9920,
+        "start": 3.0505,
+        "duration": 0.31,
+        "gain": 0.9865747226930682,
+        "pcmSha256": "a082bd0ca5db533cda8921247bf6b0755cba4803d15b48405a1f04464134c365",
+        "fadeIn": 0.00035,
+        "fadeOut": 0.2,
+        "fadeOutCurve": "half-cosine"
       },
       {
         "id": "light-04",
-        "source": "cutlery-drop-06",
-        "startSample": 27216,
-        "frames": 2400,
-        "start": 0.8505,
-        "duration": 0.075,
-        "gain": 0.6549237229385408,
-        "pcmSha256": "db66af5f1cf4c35c5c546102c3b2b5d447bc4c2c072c639739ac1413c93b91f3"
+        "source": "actual-metal",
+        "startSample": 61520,
+        "frames": 7104,
+        "start": 1.9225,
+        "duration": 0.222,
+        "gain": 0.6880082778343494,
+        "pcmSha256": "60a943c6aaafbc920c641c905d867d3adad5dc793a0eb44372d6f73ed8ca03b3",
+        "fadeIn": 0.00035,
+        "fadeOut": 0.15539999999999998,
+        "fadeOutCurve": "half-cosine"
       },
       {
         "id": "light-05",
@@ -57,23 +66,31 @@
     "medium": [
       {
         "id": "medium-01",
-        "source": "metal-hit-short",
-        "startSample": 208,
-        "frames": 5760,
-        "start": 0.0065,
-        "duration": 0.18,
-        "gain": 0.43730614397896256,
-        "pcmSha256": "b47f25f4806108a23df853973503cc69214df44e913024e02da5319d6b3dd1df"
+        "source": "actual-metal",
+        "startSample": 61520,
+        "frames": 7104,
+        "start": 1.9225,
+        "duration": 0.222,
+        "gain": 1.042924766576735,
+        "pcmSha256": "ce3edbface9012d16bbd163ad654bdcb540bd1e085bcfcc46805ce88fcaba61a",
+        "fadeIn": 0.00035,
+        "fadeOut": 0.15539999999999998,
+        "fadeOutCurve": "half-cosine"
       },
       {
         "id": "medium-02",
-        "source": "metal-strike-02",
-        "startSample": 2640,
-        "frames": 3200,
-        "start": 0.0825,
-        "duration": 0.1,
-        "gain": 0.32735440029223384,
-        "pcmSha256": "bf97c703a4418d3aeeecfb40e82e63a24c41040bbe97317d66245f2e2e49ef18"
+        "source": "actual-metal",
+        "startSample": 68816,
+        "frames": 17600,
+        "start": 2.1505,
+        "duration": 0.55,
+        "gain": 0.628216300630944,
+        "pcmSha256": "d7ef549a61691a4c620b4a30ded7e34e5e1f716857e8a8569d9ec21cb3d4fea7",
+        "fadeIn": 0.00035,
+        "fadeOut": 0.2,
+        "fadeOutCurve": "half-cosine",
+        "decayStart": 0.07,
+        "decayTimeConstant": 0.16
       },
       {
         "id": "medium-03",
@@ -87,13 +104,16 @@
       },
       {
         "id": "medium-04",
-        "source": "cutlery-drop-06",
-        "startSample": 11472,
-        "frames": 4160,
-        "start": 0.3585,
-        "duration": 0.13,
-        "gain": 0.8714733521032259,
-        "pcmSha256": "87656f2b1a17f1fbfaa2ec9bbec4feac9a4d9ee7913813566106dca4e4e6e889"
+        "source": "actual-metal",
+        "startSample": 97616,
+        "frames": 9920,
+        "start": 3.0505,
+        "duration": 0.31,
+        "gain": 1.4093924609900974,
+        "pcmSha256": "a8cfd4a31a30228eb4fecc4f2c9f29c591caea63ca1e80fdcce843e5df5a50f2",
+        "fadeIn": 0.00035,
+        "fadeOut": 0.2,
+        "fadeOutCurve": "half-cosine"
       },
       {
         "id": "medium-05",
@@ -119,45 +139,58 @@
       },
       {
         "id": "heavy-02",
-        "source": "blade-drop",
-        "startSample": 720,
-        "frames": 6080,
-        "start": 0.0225,
-        "duration": 0.19,
-        "gain": 0.5434022483344518,
-        "pcmSha256": "f7c397d3c67b5e636e6afc1e6e716e030a579361355895f53bff206a09cff2b0"
+        "source": "actual-metal",
+        "startSample": 61520,
+        "frames": 7104,
+        "start": 1.9225,
+        "duration": 0.222,
+        "gain": 1.2782729413801064,
+        "pcmSha256": "e00809c440731557873f109779433cc4375da8bd1ea14561056400ab607a6a80",
+        "fadeIn": 0.00035,
+        "fadeOut": 0.15539999999999998,
+        "fadeOutCurve": "half-cosine"
       },
       {
         "id": "heavy-03",
-        "source": "blade-drop",
-        "startSample": 6992,
-        "frames": 6400,
-        "start": 0.2185,
-        "duration": 0.2,
-        "gain": 0.4598537460859867,
-        "pcmSha256": "b8ca87d9eed412afc48b31f2f9b29d14b5abce1d39ca4d07dd6f815c7f2fe78d"
+        "source": "actual-metal",
+        "startSample": 68816,
+        "frames": 17600,
+        "start": 2.1505,
+        "duration": 0.55,
+        "gain": 0.8166811908202273,
+        "pcmSha256": "0d8ee1d890311ccf3dbded20560bd8763147b61612854b8ae8848e9dedd2d387",
+        "fadeIn": 0.00035,
+        "fadeOut": 0.2,
+        "fadeOutCurve": "half-cosine",
+        "decayStart": 0.07,
+        "decayTimeConstant": 0.16
       },
       {
         "id": "heavy-04",
-        "source": "metal-hit-short",
-        "startSample": 208,
-        "frames": 6400,
-        "start": 0.0065,
-        "duration": 0.2,
-        "gain": 0.5684979871726513,
-        "pcmSha256": "a07d9e093b77a9eee0750c2bffdb4576e78a94341f7c5c3dd50459419d3abfc6"
+        "source": "actual-metal",
+        "startSample": 76176,
+        "frames": 15360,
+        "start": 2.3805,
+        "duration": 0.48,
+        "gain": 1.0278571022381855,
+        "pcmSha256": "c5d34cd86235a35198d3f6f4b4b04627c540296cbc8bfa434b238a7b1e0d3004",
+        "fadeIn": 0.00035,
+        "fadeOut": 0.2,
+        "fadeOutCurve": "half-cosine",
+        "decayStart": 0.07,
+        "decayTimeConstant": 0.16
       }
     ],
     "floor": [
       {
         "id": "floor-01",
-        "source": "cutlery-drop-01",
-        "startSample": 5968,
-        "frames": 5120,
-        "start": 0.1865,
-        "duration": 0.16,
-        "gain": 0.8668996653404589,
-        "pcmSha256": "43ce94481ccbce8b29a1ff8f8261cdb6afeafb39667c0079dface59777b24cb8",
+        "source": "actual-metal",
+        "startSample": 61520,
+        "frames": 7104,
+        "start": 1.9225,
+        "duration": 0.222,
+        "gain": 1.1472172432344083,
+        "pcmSha256": "a52fe3e81fb2c48ccf70bacd2ab26ab1c5b3bd61a14d20f0069970141fa752d5",
         "layers": [
           {
             "source": "coins-spill-04",
@@ -165,12 +198,15 @@
             "frames": 5120,
             "start": 0.0265,
             "duration": 0.16,
-            "gain": 0.08512620388094028,
+            "gain": 0.07845154153057966,
             "maxRelativeAmplitude": 0.1,
             "fadeIn": 0.00035,
             "fadeOut": 0.014
           }
-        ]
+        ],
+        "fadeIn": 0.00035,
+        "fadeOut": 0.15539999999999998,
+        "fadeOutCurve": "half-cosine"
       },
       {
         "id": "floor-02",
@@ -197,13 +233,13 @@
       },
       {
         "id": "floor-03",
-        "source": "cutlery-drop-02",
-        "startSample": 2512,
-        "frames": 5440,
-        "start": 0.0785,
-        "duration": 0.17,
-        "gain": 1.4253279972275679,
-        "pcmSha256": "e922eb7fe11b0f99950f1837b55a8317eedd07ee117ab0071c2b8154958d59df",
+        "source": "actual-metal",
+        "startSample": 68816,
+        "frames": 17600,
+        "start": 2.1505,
+        "duration": 0.55,
+        "gain": 0.6910379306940384,
+        "pcmSha256": "6d8daaf5881b809c50a09824c42852b0deb75bae088afb46f443cedd3b84e6bc",
         "layers": [
           {
             "source": "coins-spill-04",
@@ -211,22 +247,27 @@
             "frames": 5440,
             "start": 0.3865,
             "duration": 0.17,
-            "gain": 0.06579228063611359,
+            "gain": 0.05798437854110237,
             "maxRelativeAmplitude": 0.1,
             "fadeIn": 0.00035,
             "fadeOut": 0.014
           }
-        ]
+        ],
+        "fadeIn": 0.00035,
+        "fadeOut": 0.2,
+        "fadeOutCurve": "half-cosine",
+        "decayStart": 0.07,
+        "decayTimeConstant": 0.16
       },
       {
         "id": "floor-04",
-        "source": "cutlery-drop-06",
-        "startSample": 11472,
-        "frames": 4800,
-        "start": 0.3585,
-        "duration": 0.15,
-        "gain": 0.8714733521032259,
-        "pcmSha256": "e5fd4aa5bf825dcaa6cd2c9ef8db92e9cbb0962eb6a94facf184228d26b13748",
+        "source": "actual-metal",
+        "startSample": 97616,
+        "frames": 9920,
+        "start": 3.0505,
+        "duration": 0.31,
+        "gain": 1.550331707089107,
+        "pcmSha256": "307c6051eb806429a9c40765b346f089a685768e8a00231c6dbd1e6d060f7323",
         "layers": [
           {
             "source": "coins-spill-04",
@@ -234,12 +275,15 @@
             "frames": 4800,
             "start": 0.7065,
             "duration": 0.15,
-            "gain": 0.10599418473580212,
+            "gain": 0.0709333519106301,
             "maxRelativeAmplitude": 0.1,
             "fadeIn": 0.00035,
             "fadeOut": 0.014
           }
-        ]
+        ],
+        "fadeIn": 0.00035,
+        "fadeOut": 0.2,
+        "fadeOutCurve": "half-cosine"
       },
       {
         "id": "floor-05",
@@ -266,13 +310,13 @@
       },
       {
         "id": "floor-06",
-        "source": "cutlery-clatter",
-        "startSample": 848,
-        "frames": 5760,
-        "start": 0.0265,
-        "duration": 0.18,
-        "gain": 0.6693755372888859,
-        "pcmSha256": "ae251c99ff9064febb6b9d802ea3b47972d9596883cf3dfdae933918d17309ed",
+        "source": "actual-metal",
+        "startSample": 76176,
+        "frames": 15360,
+        "start": 2.3805,
+        "duration": 0.48,
+        "gain": 0.9617310782454348,
+        "pcmSha256": "b856ab50b5e07e92cc786578593689226cb2bd0fac8ec6a8e8c4040f9eb75d35",
         "layers": [
           {
             "source": "coins-spill-04",
@@ -280,12 +324,17 @@
             "frames": 5760,
             "start": 1.4465,
             "duration": 0.18,
-            "gain": 0.1114536481333472,
+            "gain": 0.1217960010909089,
             "maxRelativeAmplitude": 0.1,
             "fadeIn": 0.00035,
             "fadeOut": 0.014
           }
-        ]
+        ],
+        "fadeIn": 0.00035,
+        "fadeOut": 0.2,
+        "fadeOutCurve": "half-cosine",
+        "decayStart": 0.07,
+        "decayTimeConstant": 0.16
       }
     ]
   }

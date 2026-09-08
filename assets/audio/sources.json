@@ -182,5 +182,13 @@
     "sha256": "023496f6fe01f509ec1b1fa4a23871ff5a04474bfc775407e0a8960e10be9507",
     "duration": 1.071,
     "originalChannels": 1
+  },
+  {
+    "id": "actual-metal",
+    "originalName": "実際の音.mp3",
+    "file": "source/actual-metal.mp3",
+    "sha256": "873bae51fe4bc940037c1207fda85737daa7321a552e7f0187cfd6dce37cc1ea",
+    "duration": 4.372,
+    "originalChannels": 2
   }
 ]
